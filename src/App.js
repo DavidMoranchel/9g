@@ -4,6 +4,7 @@ import "./App.css";
 // Components
 import Greet from "./components/Greet";
 import Counter from "./components/Counter";
+import ToggleColor from "./components/ToggleColor";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       </header>
       <Greet name="Mauro" />
       <Counter />
+      <ToggleColor />
     </div>
   );
 }
