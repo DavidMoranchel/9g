@@ -1,5 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+// Components
+import Greet from "./components/Greet";
+import Counter from "./components/Counter";
 
 function App() {
   return (
@@ -18,6 +22,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <Greet name="Mauro" />
+      <Counter />
     </div>
   );
 }
