@@ -57,9 +57,22 @@ class Koders extends Component {
 
   render() {
     console.log("Render", this.state.koders);
+    const { koders } = this.state;
+    let codeBlock;
+    if (koders.length) {
+      codeBlock = <ul>{this.renderKoders()}</ul>;
+    } else {
+      codeBlock = <h1>No hay koders</h1>;
+    }
+
     return (
       <div>
-        <ul>{this.renderKoders()}</ul>
+        {codeBlock}
+        {/* {koders.length ? (
+          <ul>{this.renderKoders()}</ul>
+        ) : (
+          <h1>No hay Koders</h1>
+        )} */}
       </div>
     );
   }
