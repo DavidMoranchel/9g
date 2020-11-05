@@ -4,20 +4,27 @@ class ConditionalRendering extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActiveState: false,
+      isActive: null,
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      isActive: !this.state.isActive, // !false -> true || !true -> false
+    });
   }
 
   render() {
-    const {
-      props: { isActive },
-      state: { isActiveState },
-    } = this;
+    const { isActive } = this.state;
 
     return (
       <div>
-        {isActive ? <h1>Prop activo</h1> : <h1>Prop inactivo</h1>}
-        {isActiveState ? <h1>State Activo</h1> : <h1>State inactivo</h1>}
+        {isActive ? <h1>Texto Activo</h1> : <h1>Texto inactivo</h1>}
+        <button onClick={this.handleClick}>
+          {isActive ? "Desactivar texto" : "Activar texto"}
+        </button>
       </div>
     );
   }

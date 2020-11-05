@@ -9,32 +9,36 @@ class Form extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // event
-  // value = event.target.value
-  // { target } = event -> target.value
-  // { target: { value }, target } = event
 
   handleChange({ target: { value } }) {
     this.setState({
-      MXNCuantity: value,
-      USDQuantity: value / 21.6,
+      MXNQuantity: value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { MXNQuantity } = this.state;
+    this.setState({
+      USDQuantity: MXNQuantity / 21.6,
     });
   }
 
   render() {
-    const { MXNCuantity, USDQuantity } = this.state;
+    const { MXNQuantity, USDQuantity } = this.state;
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="number"
-            value={MXNCuantity}
+            value={MXNQuantity}
             onChange={this.handleChange}
           />
+          <button type="submit">Convertir</button>
         </form>
-        <p>USD: ${USDQuantity}</p>
+        <p>USD: ${USDQuantity.toFixed(2)}</p>
       </div>
     );
   }
