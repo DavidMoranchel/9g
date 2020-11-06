@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// CSS
+import "./Koders.css";
+
 const KODERS_JSON = [
   {
     name: "Axel",
@@ -23,15 +26,15 @@ class Koders extends Component {
     super(props);
     this.state = {
       koders: [],
+      koderName: "",
+      koderAge: "",
     };
-    console.log("Constructor");
+
+    this.handlerNewKoderChange = this.handlerNewKoderChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    // -> Request
-    // <- Response
-    console.log("Component Mount");
-    console.log("Server Request");
     setTimeout(() => {
       console.log("Server Response");
       this.setState({
@@ -55,24 +58,52 @@ class Koders extends Component {
     });
   }
 
-  render() {
-    console.log("Render", this.state.koders);
-    const { koders } = this.state;
-    let codeBlock;
-    if (koders.length) {
-      codeBlock = <ul>{this.renderKoders()}</ul>;
-    } else {
-      codeBlock = <h1>No hay koders</h1>;
-    }
+  handlerNewKoderChange({ target: { value, name } }) {
+    this.setState({
+      [name]: value,
+    });
+  }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    let { koders, koderName, koderAge } = this.state;
+    const newKoder = {
+      name: koderName,
+      age: koderAge,
+      hobbies: [],
+    };
+    koders.push(newKoder);
+    this.setState({
+      koders,
+      koderName: "",
+      koderAge: "",
+    });
+  }
+
+  render() {
+    const { koders, koderName, koderAge } = this.state;
     return (
       <div>
-        {codeBlock}
-        {/* {koders.length ? (
+        {koders.length ? (
           <ul>{this.renderKoders()}</ul>
         ) : (
           <h1>No hay Koders</h1>
-        )} */}
+        )}
+        <form onSubmit={this.handleSubmit}>
+          Name:{" "}
+          <input
+            value={koderName}
+            onChange={this.handlerNewKoderChange}
+            name="koderName"
+          />
+          Age:{" "}
+          <input
+            value={koderAge}
+            onChange={this.handlerNewKoderChange}
+            name="koderAge"
+          />
+          <button type="submit">Crear Koder</button>
+        </form>
       </div>
     );
   }
@@ -82,11 +113,11 @@ export default Koders;
 
 /*
 
-- Koder 1, edad
-  - hobbie 1
-  - hobbie 2
-  - hobbie 3
-- Koder 2, edad
-  - hobbie 1
+1. ABSTRAER el objeto POST de un blog
+2. Crear un JSON con varios objetos POST
+3. Crear un componente que renderize esos POST's a modo de Cards (como un blog)
+4. Añadir un formulario a ese componente para poder añadir POST
+
+Happy Hacking!
 
 */
