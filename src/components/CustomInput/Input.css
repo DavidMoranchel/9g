@@ -1,0 +1,10 @@
+.customInput {
+  width: 300px;
+  height: 50px;
+  font-size: medium;
+  border: none;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+}
